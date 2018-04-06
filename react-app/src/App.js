@@ -12,10 +12,6 @@ class App extends Component {
           <Route exact path='/' component={Empty}/>
           <Route exact path='/users/list' component={UsersList}/>
         </Switch>
-        <Switch>
-          <Route exact path='/' component={Empty}/>
-          <Route exact path='/users/list' component={UsersList}/>
-        </Switch>
       </div>
     );
   }

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-angular": "npm run ng serve --prefix ./angular-app/",
+    "dev-react": "npm run start --prefix ./react-app/",
+    "dev-vue": "npm run dev --prefix ./vue-app/"
   },
   "keywords": [],
   "author": "",
