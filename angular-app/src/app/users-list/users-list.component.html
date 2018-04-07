@@ -1,0 +1,14 @@
+<div>
+  <app-navbar></app-navbar>
+  <div *ngIf="fetching">
+    FETCHING...
+  </div>
+  <div #elseBlock>
+    <div *ngFor="let user of users"
+         class="flex-row">
+      <div>{{user.id}}</div>
+      <div>{{user.name}}</div>
+      <div>{{user.email}}</div>
+    </div>
+  </div>
+</div>

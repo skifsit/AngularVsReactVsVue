@@ -2,7 +2,6 @@
   <div>
     <nav-bar />
     Empty
-    <router-view/>
   </div>
 </template>
 
