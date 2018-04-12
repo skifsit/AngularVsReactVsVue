@@ -4,12 +4,11 @@
     FETCHING...
   </div>
   <div #elseBlock>
-    <a *ngFor="let user of users"
-       routerLink="/users/{{user.id}}"
-       class="flex-row">
+    <h1>Detail information:</h1>
+    <div *ngIf="user">
       <div>{{user.id}}</div>
       <div>{{user.name}}</div>
       <div>{{user.email}}</div>
-    </a>
+    </div>
   </div>
 </div>

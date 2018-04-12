@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar'
+import { Link } from 'react-router-dom';
 
 class UsersList extends Component {
   constructor (props, context) {
@@ -24,11 +25,13 @@ class UsersList extends Component {
         ) : (
           <div>{users.map(user => {
             return (
-              <div key={user.id} className="flex-row">
+              <Link key={user.id}
+                    to={`/users/${user.id}`}
+                    className="flex-row">
                 <div>{user.id}</div>
                 <div>{user.name}</div>
                 <div>{user.email}</div>
-              </div>
+              </Link>
             )
           })}
           </div>

@@ -4,15 +4,13 @@
     <div v-if="fetching">
       FETCHING...
     </div>
-    <div v-else="">
-      <router-link v-for="user in users"
-           :key="user.id"
-           :to="`/users/${user.id}`"
-           class="flex-row">
+    <div v-else-if="user">
+      <h1>Detail information:</h1>
+      <div>
         <div>{{user.id}}</div>
         <div>{{user.name}}</div>
         <div>{{user.email}}</div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -21,36 +19,34 @@
 import NavBar from './NavBar'
 
 export default {
-  name: 'UsersList',
+  name: 'UserDetail',
   components: {
     NavBar
   },
   data () {
     return {
-      users: [],
+      user: null,
       fetching: false
     }
   },
   methods: {
-    loadUsers () {
+    loadUser (id) {
       this.fetching = true
-      fetch('http://jsonplaceholder.typicode.com/users')
-        .then(res => res.json()).then(users => {
-          this.users = users
+      fetch(`http://jsonplaceholder.typicode.com/users/${id}`)
+        .then(res => res.json()).then(user => {
+          this.user = user
+          this.fetching = false
+        }).catch(err => {
+          console.log(err)
           this.fetching = false
         })
     }
   },
   mounted () {
-    this.loadUsers()
+    this.loadUser(this.$route.params.userId)
   }
 }
 </script>
 
 <style scoped>
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
 </style>
