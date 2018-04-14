@@ -1,0 +1,14 @@
+<div>
+  <app-navbar></app-navbar>
+  <div *ngIf="fetching">
+    FETCHING...
+  </div>
+  <div #elseBlock>
+    <h1>Detail information:</h1>
+    <div *ngIf="user">
+      <div>{{user.id}}</div>
+      <div>{{user.name}}</div>
+      <div>{{user.email}}</div>
+    </div>
+  </div>
+</div>
