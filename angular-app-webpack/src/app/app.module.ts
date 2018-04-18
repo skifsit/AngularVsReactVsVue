@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import './styles.css'
 
 import { AppComponent } from './app.component';
 import { EmptyComponent } from './empty/empty.component';

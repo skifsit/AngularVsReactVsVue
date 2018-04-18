@@ -58,9 +58,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // use: [MiniCssExtractPlugin.loader, "css-loader"]
-        // use: ['style-loader', 'css-loader']
+        exclude: path.resolve('./app/styles.css'),
         use: ['raw-loader']
+      },
+      {
+        test: /\.css$/,
+        // use: [MiniCssExtractPlugin.loader, "css-loader"]
+        include: path.resolve('./app/styles.css'),
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
