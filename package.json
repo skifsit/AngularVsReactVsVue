@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev-angular": "npm run ng serve --prefix ./angular-app/",
-    "dev-react": "npm run start --prefix ./react-app/",
-    "dev-vue": "npm run dev --prefix ./vue-app/"
+    "dev-angular": "npm run dev --prefix ./angular-app-webpack/",
+    "dev-react": "npm run dev --prefix ./react-app-webpack/",
+    "dev-vue": "npm run dev --prefix ./vue-app-webpack/"
   },
   "keywords": [],
   "author": "",

@@ -2,17 +2,19 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const resultPath = path.resolve(__dirname, 'dist')
 
 module.exports = {
   mode: 'development',
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.vue', '.js'],
+    alias: {
+      '@': path.resolve('src'),
+    }
   },
   entry: {
-    app: './src/main.ts',
+    app: './src/main.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -38,29 +40,20 @@ module.exports = {
     // unsafeCache: true, // Caches resolved dependencies to avoid re-resolving them.
     rules: [
       {
-        test: /\.ts$/,
-        loader: "@ngtools/webpack"
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
-        test: /\.html$/,
-        // use: [ {
-        //   loader: 'file-loader',
-        //   options: {
-        //     name: '[path][name].[ext]'
-        //   }
-        // }, {
-        //   loader: 'file-loader',
-        //   options: {
-        //     name: '[path][name].[ext]'
-        //   }
-        // }],
-        loader: 'raw-loader',
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        loader: 'vue-loader'
       },
       {
         test: /\.css$/,
         // use: [MiniCssExtractPlugin.loader, "css-loader"]
         // use: ['style-loader', 'css-loader']
-        use: ['raw-loader']
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -124,17 +117,6 @@ module.exports = {
     }
   },
   plugins: [
-    new AngularCompilerPlugin({
-      "mainPath": "main.ts",
-      "platform": 0,
-      "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.ts"
-      },
-      "sourceMap": true,
-      "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true,
-      "compilerOptions": {}
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html',
@@ -157,7 +139,7 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     // hot: true,
-    port: 9661,
+    port: 9663,
     before(app){
       app.get('*', function(req, res, next) {
         console.log(req.url)
