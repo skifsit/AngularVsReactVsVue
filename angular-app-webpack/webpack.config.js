@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const resultPath = path.resolve(__dirname, 'dist')
+const isDevServer = process.argv[1].indexOf('webpack-dev-server') >= 0
 
 module.exports = {
   mode: 'development',
@@ -58,13 +59,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: path.resolve('./app/styles.css'),
+        exclude: /styles\.css$/,
         use: ['raw-loader']
       },
       {
         test: /\.css$/,
         // use: [MiniCssExtractPlugin.loader, "css-loader"]
-        include: path.resolve('./app/styles.css'),
+        include: /styles\.css$/,
         use: ['style-loader', 'css-loader']
       }
     ]
@@ -148,7 +149,6 @@ module.exports = {
     //   filename: "[name].css",
     //   chunkFilename: "[id].css"
     // }),
-    new CleanWebpackPlugin(['dist']),
     // webpack.optimize.splitChunks({
     //   name: 'vendor' // Specify the common bundle's name.
     // })
@@ -170,4 +170,8 @@ module.exports = {
       });
     }
   }
+}
+
+if (!isDevServer) {
+  module.exports.plugins.push(new CleanWebpackPlugin(['dist']))
 }
